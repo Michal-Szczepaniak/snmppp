@@ -100,25 +100,19 @@ void SNMPpp::openSession( SNMPpp::SessionHandle &sessionHandle, const std::strin
         throw std::runtime_error("Unsupported secLevel, valid: authPriv, authNoPriv, noAuthNoPriv");
     }
 
-    if (authProtocol == "MD5") {
-        session.securityAuthProto = usmHMACMD5AuthProtocol;
-        session.securityAuthProtoLen = USM_AUTH_PROTO_MD5_LEN;
-    } else if (authProtocol == "SHA1") {
+    if (authProtocol == "SHA1") {
         session.securityAuthProto = usmHMACSHA1AuthProtocol;
         session.securityAuthProtoLen = USM_AUTH_PROTO_SHA_LEN;
     } else {
-        throw std::runtime_error("Unsupported authProtocol, valid: MD5, SHA1");
+        throw std::runtime_error("Unsupported authProtocol, valid: SHA1");
     }
     session.securityAuthKeyLen   = USM_AUTH_KU_LEN;
 
-    if (privProtocol == "DES") {
-        session.securityPrivProto = usmDESPrivProtocol;
-        session.securityPrivProtoLen = USM_PRIV_PROTO_DES_LEN;
-    } else if (privProtocol == "AES") {
+    if (privProtocol == "AES") {
         session.securityPrivProto = usmAESPrivProtocol;
         session.securityPrivProtoLen = USM_PRIV_PROTO_AES_LEN;
     } else {
-        throw std::runtime_error("Unsupported privProtocol, valid: DES, AES");
+        throw std::runtime_error("Unsupported privProtocol, valid: AES");
     }
     session.securityPrivKeyLen = USM_PRIV_KU_LEN;
 
